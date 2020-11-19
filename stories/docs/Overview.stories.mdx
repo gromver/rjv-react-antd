@@ -1,0 +1,21 @@
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks';
+import { Form, InputField } from '../../src';
+
+<Meta title="MDX/InputField" component={InputField} />
+
+# InputField
+
+With `MDX` we can define a story for `InputField` right in the middle of our
+Markdown documentation.
+
+<Props of={InputField} />
+
+<!--- This is your Story template function, shown here in React -->
+
+<Canvas>
+  <Story name="InputField">
+    <Form>
+      <InputField path="foo" label="Input field" schema={{ presence: true }} />
+    </Form>
+  </Story>
+</Canvas>
