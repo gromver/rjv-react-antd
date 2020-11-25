@@ -1,7 +1,7 @@
-import React, { createRef } from 'react'
+import React, { createRef, useCallback } from 'react'
 import { Button } from 'antd'
 import { ValidationMessage } from 'rjv'
-import { ModelProviderRef, OptionsProvider } from 'rjv-react'
+import { FormProviderRef, OptionsProvider } from 'rjv-react'
 import Form from '../src/components/Form'
 import InputField from '../src/components/InputField'
 
@@ -35,11 +35,11 @@ export const Case1 = () => {
 Case1.storyName = 'Overview'
 
 export const Case2 = () => {
-  const modelRef = createRef<ModelProviderRef>()
+  const formProviderRef = createRef<FormProviderRef>()
 
   return (
     <Form
-      ref={modelRef}
+      ref={formProviderRef}
       layout={'vertical'}
       onSuccess={(data) => console.log('success', data)}
       onError={(ref: any) => console.log('error', ref)}
@@ -55,25 +55,19 @@ export const Case2 = () => {
         itemProps={{ hasFeedback: true }}
         autoFocus
       />
-      <Button htmlType="submit" onClick={() => console.log(modelRef)}>Submit</Button>
+      <Button htmlType="submit" onClick={() => console.log(formProviderRef)}>Submit</Button>
     </Form>
   )
 }
 Case2.storyName = 'Ref forwarding test'
 
 export const Case3 = () => {
-  return (
-    <OptionsProvider
-      options={{
-        descriptionResolver: (m) => {
-          if (typeof m.description === 'string') {
-            return m.description.toUpperCase()
-          }
+  const descriptionResolver = useCallback((m) => {
+    return m.toString().toUpperCase()
+  }, [])
 
-          return m.description
-        }
-      }}
-    >
+  return (
+    <OptionsProvider descriptionResolver={descriptionResolver}>
       <Form layout={'vertical'}>
         <InputField
           schema={{
@@ -91,16 +85,15 @@ export const Case3 = () => {
                     () => {
                       if (ref.value === 'wrong@email.com') {
                         r(
-                          ref.createErrorResult(
-                            new ValidationMessage(
-                              'verifyEmail',
-                              'Email is already used'
-                            )
+                          new ValidationMessage(
+                            false,
+                            'verifyEmail',
+                            'Email is already used'
                           )
                         )
                       }
 
-                      return r(ref.createSuccessResult())
+                      return r()
                     },
                     500,
                     {}

@@ -1,4 +1,5 @@
 import React from 'react'
+import { types } from 'rjv'
 import { Alert, Button } from 'antd'
 import Form from '../src/components/Form'
 import SwitchField from '../src/components/SwitchField'
@@ -9,7 +10,7 @@ export default {
 }
 
 export const Overview = () => {
-  const schema = {
+  const schema: types.ISchema = {
     default: false,
     const: true
   }
@@ -55,6 +56,26 @@ export const Overview = () => {
       />
 
       <Button htmlType="submit">Submit</Button>
+    </Form>
+  )
+}
+
+export const Readonly = () => {
+  const schema: types.ISchema = {
+    type: 'boolean',
+    default: true,
+    readonly: true
+  }
+
+  return (
+    <Form layout="vertical">
+      <SwitchField
+        schema={schema}
+        path="field"
+        label="Field readonly=true"
+        itemProps={{ hasFeedback: true }}
+        validateTrigger="onChange"
+      />
     </Form>
   )
 }

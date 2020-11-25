@@ -1,12 +1,10 @@
 import React, { useMemo, forwardRef, createRef, useCallback } from 'react'
 import { Form as AntForm } from 'antd'
 import { FormProps } from 'antd/es/form'
-import { types } from 'rjv'
 import { FormProvider, FormProviderRef, FieldApi } from 'rjv-react'
 import { FormContext, FormContextValue } from './FormContext'
 
 type Props = FormProps & {
-  validationOptions?: Partial<types.IValidatorOptions>;
   data?: any;
   validateTrigger?: 'onBlur' | 'onChange' | 'none';
   focusFirstError?: boolean;
@@ -15,7 +13,7 @@ type Props = FormProps & {
 }
 
 const Form = forwardRef<FormProviderRef, Props>(({
-  validationOptions,
+  // validationOptions,
   validateTrigger,
   onSuccess,
   onError,
@@ -53,7 +51,6 @@ const Form = forwardRef<FormProviderRef, Props>(({
   return (
     <FormProvider
       ref={ref || fallbackRef}
-      validationOptions={validationOptions}
       data={data}>
       <FormContext.Provider value={value}>
         <AntForm onSubmitCapture={handleSubmit} {...formProps} />

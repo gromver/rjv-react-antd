@@ -1,4 +1,5 @@
 import React from 'react'
+import { types } from 'rjv'
 import NumberField from '../src/components/NumberField'
 import Form from '../src/components/Form/Form'
 import { Alert, Button } from 'antd'
@@ -9,7 +10,7 @@ export default {
 }
 
 export const Overview = () => {
-  const schema = {
+  const schema: types.ISchema = {
     type: 'number',
     presence: true,
     minimum: 5
@@ -69,6 +70,13 @@ export const Overview = () => {
         itemProps={{ hasFeedback: true }}
         validateTrigger="none"
         clearStateOnChange={false}
+      />
+
+      <NumberField
+        schema={{ type: 'number', default: 10, readonly: true }}
+        path="field7"
+        label={'Case #7 - readonly=true'}
+        itemProps={{ hasFeedback: true }}
       />
 
       <Button htmlType="submit">Submit</Button>

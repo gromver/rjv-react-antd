@@ -19,8 +19,29 @@ export const Overview = () => {
           }
         }}
         path="field"
-        label={'Checkbox Group'}
+        label={'Checkbox group'}
         help={'Only "a" and "b" are valid'}
+        itemProps={{ hasFeedback: true }}
+        validateTrigger="onChange"
+      >
+        <CheckboxGroupField.Checkbox value={'a'}>A</CheckboxGroupField.Checkbox>
+        <CheckboxGroupField.Checkbox value={'b'}>B</CheckboxGroupField.Checkbox>
+        <CheckboxGroupField.Checkbox value={'c'}>C</CheckboxGroupField.Checkbox>
+      </CheckboxGroupField>
+    </FormProvider>
+  )
+}
+
+export const Readonly = () => {
+  return (
+    <FormProvider>
+      <CheckboxGroupField
+        schema={{
+          default: [],
+          readonly: true
+        }}
+        path="field"
+        label={'Checkbox readonly group'}
         itemProps={{ hasFeedback: true }}
         validateTrigger="onChange"
       >

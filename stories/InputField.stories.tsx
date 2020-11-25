@@ -71,6 +71,13 @@ export const Overview = () => {
         clearStateOnChange={false}
       />
 
+      <InputField
+        schema={{ type: 'string', default: 'readonly content', readonly: true }}
+        path="field7"
+        label={'Case #7 - readonly=true'}
+        itemProps={{ hasFeedback: true }}
+      />
+
       <Button htmlType="submit">Submit</Button>
     </Form>
   )

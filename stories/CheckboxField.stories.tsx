@@ -1,4 +1,5 @@
 import React from 'react'
+import { types } from 'rjv'
 import { Alert, Button } from 'antd'
 import Form from '../src/components/Form'
 import CheckboxField from '../src/components/CheckboxField'
@@ -9,7 +10,7 @@ export default {
 }
 
 export const Overview = () => {
-  const schema = {
+  const schema: types.ISchema = {
     default: false,
     const: true
   }
@@ -52,6 +53,13 @@ export const Overview = () => {
         itemProps={{ hasFeedback: true }}
         validateTrigger="none"
         clearStateOnChange={false}
+      />
+
+      <CheckboxField
+        schema={{ type: 'boolean', default: true, readonly: true }}
+        path="field5"
+        label="Case #5 - readonly=true"
+        itemProps={{ hasFeedback: true }}
       />
 
       <Button htmlType="submit">Submit</Button>

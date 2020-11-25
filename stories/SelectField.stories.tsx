@@ -1,4 +1,5 @@
 import React from 'react'
+import { types } from 'rjv'
 import { Alert, Button, Select } from 'antd'
 import Form from '../src/components/Form'
 import SelectField from '../src/components/SelectField'
@@ -9,7 +10,7 @@ export default {
 }
 
 export const SingleMode = () => {
-  const schema = {
+  const schema: types.ISchema = {
     presence: true,
     const: 'foo'
   }
@@ -95,6 +96,32 @@ export const SingleMode = () => {
         itemProps={{ hasFeedback: true }}
         validateTrigger="none"
         clearStateOnChange={false}
+        autoFocus
+      >
+        <Select.Option value={'foo'}>Foo</Select.Option>
+        <Select.Option value={'bar'}>Bar</Select.Option>
+      </SelectField>
+
+      <SelectField
+        schema={schema}
+        path="field6"
+        label="Case #6 - validationTrigger=none, clearStateOnChange=false"
+        placeholder="Select..."
+        itemProps={{ hasFeedback: true }}
+        validateTrigger="none"
+        clearStateOnChange={false}
+        autoFocus
+      >
+        <Select.Option value={'foo'}>Foo</Select.Option>
+        <Select.Option value={'bar'}>Bar</Select.Option>
+      </SelectField>
+
+      <SelectField
+        schema={{ type: 'string', readonly: true }}
+        path="field7"
+        label="Case #7 - readonly=true"
+        placeholder="Select..."
+        itemProps={{ hasFeedback: true }}
         autoFocus
       >
         <Select.Option value={'foo'}>Foo</Select.Option>
@@ -193,14 +220,12 @@ export const MultipleItems = () => {
       </SelectField>
 
       <SelectField
-        schema={schema}
-        path="field6"
-        label="Case #6 - validationTrigger=none, clearStateOnChange=false"
+        schema={{ type: 'array', default: [], readonly: true }}
+        path="field7"
+        label="Case #7 - readonly=true"
         placeholder="Select..."
         itemProps={{ hasFeedback: true }}
         inputProps={{ mode: 'multiple' }}
-        validateTrigger="none"
-        clearStateOnChange={false}
         autoFocus
       >
         <Select.Option value={'foo'}>Foo</Select.Option>

@@ -80,7 +80,7 @@ const InputField: FC<Props> = ({
                   : undefined
               }
               placeholder={placeholder}
-              // disabled={field.isReadOnly}
+              disabled={field.isReadonly}
               autoFocus={autoFocus}
               {...inputProps}
             />

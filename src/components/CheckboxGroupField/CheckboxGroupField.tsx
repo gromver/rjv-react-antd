@@ -65,7 +65,7 @@ const CheckboxGroupField: FC<Props> & { Checkbox: typeof Checkbox } = ({
 
                 validateTrigger !== 'none' && field.validate()
               }}
-              // disabled={field.isReadOnly}
+              disabled={field.isReadonly}
               {...inputProps}
             >
               {children}

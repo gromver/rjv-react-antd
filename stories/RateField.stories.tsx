@@ -26,3 +26,20 @@ export const Overview = () => {
     </Form>
   )
 }
+
+export const Readonly = () => {
+  return (
+    <Form>
+      <RateField
+        schema={{
+          type: 'number',
+          readonly: true
+        }}
+        path="field"
+        label={'Rate field readonly'}
+        itemProps={{ hasFeedback: true }}
+      />
+      <Button htmlType="submit">Submit</Button>
+    </Form>
+  )
+}

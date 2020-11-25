@@ -71,7 +71,7 @@ const NumberField: FC<Props> = ({
                   ? () => field.state.isDirty && field.validate()
                   : undefined
               }
-              // disabled={field.isReadOnly}
+              disabled={field.isReadonly}
               autoFocus={autoFocus}
               {...inputProps}
             />

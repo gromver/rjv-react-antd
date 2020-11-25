@@ -63,7 +63,7 @@ const RateField: FC<Props> = ({
 
                 validateTrigger !== 'none' && field.validate()
               }}
-              // disabled={field.isReadOnly}
+              disabled={field.isReadonly}
               {...inputProps}
             />
           </Form.Item>

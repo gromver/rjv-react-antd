@@ -65,7 +65,7 @@ const CheckboxField: FC<Props> = ({
 
                 validateTrigger !== 'none' && field.validate()
               }}
-              // disabled={field.isReadOnly}
+              disabled={field.isReadonly}
               autoFocus={autoFocus}
               {...inputProps}
             />

@@ -75,7 +75,7 @@ const SelectField: FC<Props> = ({
                   ? () => field.state.isDirty && field.validate()
                   : undefined
               }
-              // disabled={field.isReadOnly}
+              disabled={field.isReadonly}
               placeholder={placeholder}
               autoFocus={autoFocus}
               {...inputProps}
