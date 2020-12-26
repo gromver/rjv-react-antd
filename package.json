@@ -1,6 +1,6 @@
 {
   "name": "rjv-react-antd",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Ant Design's form fields powered by the rjv-react",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -101,8 +101,8 @@
     "antd": "^4.0.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
-    "rjv": "^5.0.0-alpha.6",
-    "rjv-react": "^5.0.0-alpha.4"
+    "rjv": "^5.0.0-alpha.7",
+    "rjv-react": "^5.0.0-alpha.6"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
@@ -131,8 +131,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-test-renderer": "^16.8.6",
-    "rjv": "^5.0.0-alpha.6",
-    "rjv-react": "^5.0.0-alpha.4",
+    "rjv": "^5.0.0-alpha.7",
+    "rjv-react": "^5.0.0-alpha.6",
     "shx": "^0.3.2",
     "standard-version": "^8.0.2",
     "ts-jest": "^26.4.4",
