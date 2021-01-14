@@ -58,7 +58,7 @@ const InputField: FC<Props> = ({
             label={label}
             validateStatus={utils.getValidationStatus(field)}
             help={field.messageDescription || help}
-            required={field.isRequired}
+            required={field.state.isRequired}
             {...itemProps}
           >
             <Input
@@ -80,7 +80,7 @@ const InputField: FC<Props> = ({
                   : undefined
               }
               placeholder={placeholder}
-              disabled={field.isReadonly}
+              disabled={field.state.isReadonly}
               autoFocus={autoFocus}
               {...inputProps}
             />

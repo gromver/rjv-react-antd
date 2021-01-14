@@ -50,7 +50,7 @@ const CheckboxField: FC<Props> = ({
             label={label}
             validateStatus={utils.getValidationStatus(field)}
             help={field.messageDescription || help}
-            required={field.isRequired}
+            required={field.state.isRequired}
             {...itemProps}
           >
             <Checkbox
@@ -65,7 +65,7 @@ const CheckboxField: FC<Props> = ({
 
                 validateTrigger !== 'none' && field.validate()
               }}
-              disabled={field.isReadonly}
+              disabled={field.state.isReadonly}
               autoFocus={autoFocus}
               {...inputProps}
             />

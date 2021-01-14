@@ -1,7 +1,7 @@
-import React, { FC, useContext, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import { Form } from 'antd'
 import { FormItemProps } from 'antd/es/form'
-import { ErrorProvider, ErrorContext, ValidationErrors } from 'rjv-react'
+import { ErrorProvider, useErrors } from 'rjv-react'
 
 type Props = {
   children: React.ReactNode;
@@ -16,22 +16,14 @@ function FormItemField ({
   help,
   itemProps = {}
 }: Props) {
-  const [errors, setErrors] = useState<ValidationErrors>([])
-  const errorProviderContext = useContext(ErrorContext)
-
-  useEffect(() => {
-    if (errorProviderContext) {
-      return errorProviderContext
-        .subscribe((errors) => setErrors(errors))
-    }
-  }, [errorProviderContext])
+  const errors = useErrors()
 
   return (
     <ErrorProvider>
       <Form.Item
         label={label}
         validateStatus={errors.length ? 'error' : undefined}
-        help={errors.length ? errors.map(([, message]) => message) : help}
+        help={errors.length ? errors.map(({ message }) => message) : help}
         {...itemProps}
       >
         {children}

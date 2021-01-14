@@ -50,7 +50,7 @@ const RadioGroupField: FC<Props> = ({
             label={label}
             validateStatus={utils.getValidationStatus(field)}
             help={field.messageDescription || help}
-            required={field.isRequired}
+            required={field.state.isRequired}
             {...itemProps}
           >
             <Radio.Group
@@ -65,7 +65,7 @@ const RadioGroupField: FC<Props> = ({
 
                 validateTrigger !== 'none' && field.validate()
               }}
-              disabled={field.isReadonly}
+              disabled={field.state.isReadonly}
               {...inputProps}
             >
               {children}

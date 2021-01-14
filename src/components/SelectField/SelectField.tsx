@@ -54,7 +54,7 @@ const SelectField: FC<Props> = ({
             label={label}
             validateStatus={utils.getValidationStatus(field)}
             help={field.messageDescription || help}
-            required={field.isRequired}
+            required={field.state.isRequired}
             {...itemProps}
           >
             <Select
@@ -75,7 +75,7 @@ const SelectField: FC<Props> = ({
                   ? () => field.state.isDirty && field.validate()
                   : undefined
               }
-              disabled={field.isReadonly}
+              disabled={field.state.isReadonly}
               placeholder={placeholder}
               autoFocus={autoFocus}
               {...inputProps}

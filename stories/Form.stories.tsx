@@ -1,6 +1,5 @@
 import React, { createRef, useCallback } from 'react'
 import { Button } from 'antd'
-import { ValidationMessage } from 'rjv'
 import { FormProviderRef, OptionsProvider } from 'rjv-react'
 import Form from '../src/components/Form'
 import InputField from '../src/components/InputField'
@@ -84,13 +83,7 @@ export const Case3 = () => {
                   setTimeout(
                     () => {
                       if (ref.value === 'wrong@email.com') {
-                        r(
-                          new ValidationMessage(
-                            false,
-                            'verifyEmail',
-                            'Email is already used'
-                          )
-                        )
+                        r('Email is already used')
                       }
 
                       return r()

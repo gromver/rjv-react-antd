@@ -50,7 +50,7 @@ const SwitchField: FC<Props> = ({
             label={label}
             validateStatus={utils.getValidationStatus(field)}
             help={field.messageDescription || help}
-            required={field.isRequired}
+            required={field.state.isRequired}
             {...itemProps}
           >
             <Switch
@@ -65,7 +65,7 @@ const SwitchField: FC<Props> = ({
 
                 validateTrigger !== 'none' && field.validate()
               }}
-              disabled={field.isReadonly}
+              disabled={field.state.isReadonly}
               autoFocus={autoFocus}
               {...inputProps}
             />
