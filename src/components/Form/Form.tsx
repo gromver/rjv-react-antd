@@ -1,62 +1,57 @@
-import React, { useMemo, forwardRef, createRef, useCallback } from 'react'
+import React, { useMemo, useCallback, FC } from 'react'
 import { Form as AntForm } from 'antd'
-import { FormProps } from 'antd/es/form'
-import { FormProvider, FormProviderRef, FieldApi } from 'rjv-react'
+import { FormProps as AntFormProps } from 'antd/es/form'
+import { FormProvider, useFormApi, FirstErrorField } from 'rjv-react'
 import { FormContext, FormContextValue } from './FormContext'
 
-type Props = FormProps & {
-  data?: any;
+type Props = AntFormProps & {
   validateTrigger?: 'onBlur' | 'onChange' | 'none';
   focusFirstError?: boolean;
-  onSuccess?: (data: any) => void;
-  onError?: (errorField: FieldApi) => void;
+  onSuccess?: (data: any) => void | Promise<void>;
+  onError?: (firstErrorField: FirstErrorField) => void;
 }
 
-const Form = forwardRef<FormProviderRef, Props>(({
-  // validationOptions,
+function Form ({
   validateTrigger,
   onSuccess,
   onError,
-  data = {},
   focusFirstError = true,
   ...formProps
-}, ref: any) => {
-  const value = useMemo<FormContextValue>(() => {
+}: Props) {
+  const formContextValue = useMemo<FormContextValue>(() => {
     return {
       validateTrigger: validateTrigger || 'onBlur'
     }
   }, [validateTrigger])
-  const fallbackRef = createRef<FormProviderRef | undefined>()
+
+  const { submit } = useFormApi()
 
   const handleSubmit = useCallback(() => {
-    const providerRef: React.RefObject<FormProviderRef | undefined> = ref || fallbackRef
+    submit(
+      onSuccess,
+      (firstErrorField) => {
+        onError && onError(firstErrorField)
 
-    if (providerRef.current) {
-      return providerRef.current
-        .submit()
-        .then(({ valid, firstErrorField, data }) => {
-          if (valid) {
-            onSuccess && onSuccess(data)
-          } else {
-            onError && onError(firstErrorField as any)
-
-            if (focusFirstError) {
-              firstErrorField && firstErrorField.focus()
-            }
-          }
-        })
-    }
-  }, [ref, fallbackRef])
+        if (focusFirstError) {
+          firstErrorField && firstErrorField.focus()
+        }
+      }
+    )
+  }, [submit, onSuccess, onError])
 
   return (
-    <FormProvider
-      ref={ref || fallbackRef}
-      data={data}>
-      <FormContext.Provider value={value}>
-        <AntForm onSubmitCapture={handleSubmit} {...formProps} />
-      </FormContext.Provider>
+    <FormContext.Provider value={formContextValue}>
+      <AntForm onSubmitCapture={handleSubmit} {...formProps} />
+    </FormContext.Provider>
+  )
+}
+
+const WithFormProvider: FC<Props & { data: any }> = ({ data, ...rest }) => {
+  return (
+    <FormProvider data={data}>
+      <Form {...rest} />
     </FormProvider>
   )
-})
+}
 
-export default Form
+export default WithFormProvider

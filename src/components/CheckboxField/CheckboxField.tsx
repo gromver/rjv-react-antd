@@ -3,7 +3,7 @@ import { Form, Checkbox } from 'antd'
 import { CheckboxProps } from 'antd/es/checkbox'
 import { FormItemProps } from 'antd/es/form'
 import { types } from 'rjv'
-import { Field } from 'rjv-react'
+import { useField } from 'rjv-react'
 import { FormContext, utils } from '../Form'
 
 const fallbackFormContext = {
@@ -40,39 +40,33 @@ const CheckboxField: FC<Props> = ({
     [formContext.validateTrigger, props.validateTrigger]
   )
 
+  const { field, state, inputRef } = useField(path, schema)
+
   return (
-    <Field
-      path={path}
-      schema={schema}
-      render={(field, inputRef) => {
-        return (
-          <Form.Item
-            label={label}
-            validateStatus={utils.getValidationStatus(field)}
-            help={field.messageDescription || help}
-            required={field.state.isRequired}
-            {...itemProps}
-          >
-            <Checkbox
-              ref={inputRef}
-              checked={field.value}
-              onChange={(e) => {
-                if (clearStateOnChange && validateTrigger === 'none' && field.state.isValidated) {
-                  field.markAsInvalidated()
-                }
+    <Form.Item
+      label={label}
+      validateStatus={utils.getValidationStatus(state)}
+      help={field.messageDescription || help}
+      required={state.isRequired}
+      {...itemProps}
+    >
+      <Checkbox
+        ref={inputRef}
+        checked={field.value}
+        onChange={(e) => {
+          if (clearStateOnChange && validateTrigger === 'none' && state.isValidated) {
+            field.invalidated()
+          }
 
-                field.markAsTouched().markAsDirty().value = e.target.checked
+          field.touched().dirty().value = e.target.checked
 
-                validateTrigger !== 'none' && field.validate()
-              }}
-              disabled={field.state.isReadonly}
-              autoFocus={autoFocus}
-              {...inputProps}
-            />
-          </Form.Item>
-        )
-      }}
-    />
+          validateTrigger !== 'none' && field.validate()
+        }}
+        disabled={state.isReadonly}
+        autoFocus={autoFocus}
+        {...inputProps}
+      />
+    </Form.Item>
   )
 }
 

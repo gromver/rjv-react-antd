@@ -3,7 +3,7 @@ import { Form, Input } from 'antd'
 import { InputProps } from 'antd/es/input'
 import { FormItemProps } from 'antd/es/form'
 import { types } from 'rjv'
-import { Field } from 'rjv-react'
+import { useField } from 'rjv-react'
 import { FormContext, utils } from '../Form'
 
 const fallbackFormContext = {
@@ -48,46 +48,40 @@ const InputField: FC<Props> = ({
     [formContext.validateTrigger, props.validateTrigger]
   )
 
+  const { field, state, inputRef } = useField(path, schema)
+
   return (
-    <Field
-      path={path}
-      schema={schema}
-      render={(field, inputRef) => {
-        return (
-          <Form.Item
-            label={label}
-            validateStatus={utils.getValidationStatus(field)}
-            help={field.messageDescription || help}
-            required={field.state.isRequired}
-            {...itemProps}
-          >
-            <Input
-              ref={inputRef}
-              value={field.value}
-              onFocus={() => field.markAsTouched()}
-              onChange={(e) => {
-                if (clearStateOnChange && validateTrigger !== 'onChange' && field.state.isValidated) {
-                  field.markAsInvalidated()
-                }
+    <Form.Item
+      label={label}
+      validateStatus={utils.getValidationStatus(state)}
+      help={field.messageDescription || help}
+      required={state.isRequired}
+      {...itemProps}
+    >
+      <Input
+        ref={inputRef}
+        value={field.value}
+        onFocus={() => field.touched()}
+        onChange={(e) => {
+          if (clearStateOnChange && validateTrigger !== 'onChange' && state.isValidated) {
+            field.invalidated()
+          }
 
-                field.markAsDirty().value = e.target.value
+          field.dirty().value = e.target.value
 
-                validateTrigger === 'onChange' && field.validate()
-              }}
-              onBlur={
-                validateTrigger === 'onBlur'
-                  ? () => field.state.isDirty && field.validate()
-                  : undefined
-              }
-              placeholder={placeholder}
-              disabled={field.state.isReadonly}
-              autoFocus={autoFocus}
-              {...inputProps}
-            />
-          </Form.Item>
-        )
-      }}
-    />
+          validateTrigger === 'onChange' && field.validate()
+        }}
+        onBlur={
+          validateTrigger === 'onBlur'
+            ? () => state.isDirty && field.validate()
+            : undefined
+        }
+        placeholder={placeholder}
+        disabled={state.isReadonly}
+        autoFocus={autoFocus}
+        {...inputProps}
+      />
+    </Form.Item>
   )
 }
 

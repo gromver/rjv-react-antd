@@ -1,5 +1,5 @@
 import React from 'react'
-import FormProvider from '../src/components/Form'
+import Form from '../src/components/Form'
 import CheckboxGroupField from '../src/components/CheckboxGroupField'
 
 export default {
@@ -9,7 +9,7 @@ export default {
 
 export const Overview = () => {
   return (
-    <FormProvider>
+    <Form data={{}}>
       <CheckboxGroupField
         schema={{
           default: [],
@@ -28,13 +28,13 @@ export const Overview = () => {
         <CheckboxGroupField.Checkbox value={'b'}>B</CheckboxGroupField.Checkbox>
         <CheckboxGroupField.Checkbox value={'c'}>C</CheckboxGroupField.Checkbox>
       </CheckboxGroupField>
-    </FormProvider>
+    </Form>
   )
 }
 
 export const Readonly = () => {
   return (
-    <FormProvider>
+    <Form data={{}}>
       <CheckboxGroupField
         schema={{
           default: [],
@@ -49,6 +49,6 @@ export const Readonly = () => {
         <CheckboxGroupField.Checkbox value={'b'}>B</CheckboxGroupField.Checkbox>
         <CheckboxGroupField.Checkbox value={'c'}>C</CheckboxGroupField.Checkbox>
       </CheckboxGroupField>
-    </FormProvider>
+    </Form>
   )
 }

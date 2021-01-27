@@ -10,7 +10,7 @@ export default {
 
 export const Overview = () => {
   return (
-    <Form>
+    <Form data={{}}>
       <RateField
         schema={{
           type: 'number',
@@ -29,7 +29,7 @@ export const Overview = () => {
 
 export const Readonly = () => {
   return (
-    <Form>
+    <Form data={{}}>
       <RateField
         schema={{
           type: 'number',

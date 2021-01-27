@@ -1,42 +1,45 @@
-import React, { FC } from 'react'
+import React, { FC, useMemo } from 'react'
 import { Form } from 'antd'
 import { FormItemProps } from 'antd/es/form'
-import { ErrorProvider, useErrors } from 'rjv-react'
+import { CatchErrors, useErrors } from 'rjv-react'
 
 type Props = {
-  children: React.ReactNode;
-  label?: React.ReactNode;
-  help?: React.ReactNode;
-  itemProps?: FormItemProps;
-}
+  showAllErrors?: boolean
+} & FormItemProps
 
 function FormItemField ({
   children,
   label,
   help,
-  itemProps = {}
+  showAllErrors = true,
+  ...props
 }: Props) {
   const errors = useErrors()
+  const _help = useMemo(() => {
+    if (errors.length) {
+      return showAllErrors ? errors.map(({ message }) => message) : errors[0].message
+    }
+
+    return help
+  }, [help, errors, showAllErrors])
 
   return (
-    <ErrorProvider>
-      <Form.Item
-        label={label}
-        validateStatus={errors.length ? 'error' : undefined}
-        help={errors.length ? errors.map(({ message }) => message) : help}
-        {...itemProps}
-      >
-        {children}
-      </Form.Item>
-    </ErrorProvider>
+    <Form.Item
+      label={label}
+      validateStatus={errors.length ? 'error' : undefined}
+      help={_help}
+      {...props}
+    >
+      {children}
+    </Form.Item>
   )
 }
 
 const WithErrorProvider: FC<Props> = (props) => {
   return (
-    <ErrorProvider>
+    <CatchErrors>
       <FormItemField {...props} />
-    </ErrorProvider>
+    </CatchErrors>
   )
 }
 

@@ -1,20 +1,20 @@
-import { FieldApi } from 'rjv-react'
+import { FieldState } from 'rjv-react'
 
 /**
  * Extracts validation status for the Antd's Form.Item component
- * @param field
+ * @param state
  */
-export function getValidationStatus (field: FieldApi) {
-  if (field.state.isValidating) {
+export function getValidationStatus (state: FieldState) {
+  if (state.isValidating) {
     return 'validating'
   }
 
-  if (field.state.isValidated) {
-    if (field.state.isValid) {
-      return field.state.message ? 'warning' : 'success'
+  if (state.isValidated) {
+    if (state.isValid) {
+      return state.message ? 'warning' : 'success'
     }
 
-    if (!field.state.isValid) {
+    if (!state.isValid) {
       return 'error'
     }
   }

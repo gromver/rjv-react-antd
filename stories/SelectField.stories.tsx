@@ -16,7 +16,7 @@ export const SingleMode = () => {
   }
 
   return (
-    <Form layout="vertical">
+    <Form data={{}} layout="vertical">
       <Alert message={'Only "Foo" is valid'} type="warning" showIcon />
 
       <br />
@@ -142,7 +142,7 @@ export const MultipleItems = () => {
   }
 
   return (
-    <Form layout="vertical">
+    <Form data={{}} layout="vertical">
       <Alert message={'Only "Foo" is valid'} type="warning" showIcon />
 
       <br />

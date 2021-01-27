@@ -16,7 +16,7 @@ export const Overview = () => {
   }
 
   return (
-    <Form layout="vertical">
+    <Form data={{}} layout="vertical">
       <Alert message="Should be true" type="warning" showIcon />
 
       <br />

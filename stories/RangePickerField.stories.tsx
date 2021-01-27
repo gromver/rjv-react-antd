@@ -1,28 +1,25 @@
 import React from 'react'
 import { types } from 'rjv'
 import { Button, Alert } from 'antd'
+import moment from 'moment'
 import Form from '../src/components/Form'
-import InputField from '../src/components/InputField'
+import RangePickerField from '../src/components/RangePickerField'
 
 export default {
-  title: 'Components / InputField',
-  component: InputField
+  title: 'Components / RangePickerField',
+  component: RangePickerField
 }
 
 export const Overview = () => {
-  const schema: types.ISchema = {
-    default: '',
-    presence: true,
-    format: 'email'
-  }
+  const schema: types.ISchema = { presence: true }
 
   return (
     <Form data={{}} layout="vertical">
-      <Alert message="All fields should be valid emails" type="warning" showIcon />
+      <Alert message="All fields are required" type="warning" showIcon />
 
       <br />
 
-      <InputField
+      <RangePickerField
         schema={schema}
         path="field1"
         label={'Case #1 - validationTrigger=onBlur, clearStateOnChange=true'}
@@ -30,7 +27,7 @@ export const Overview = () => {
         autoFocus
       />
 
-      <InputField
+      <RangePickerField
         schema={schema}
         path="field2"
         label={'Case #2 - validationTrigger=onBlur, clearStateOnChange=false'}
@@ -38,7 +35,7 @@ export const Overview = () => {
         clearStateOnChange={false}
       />
 
-      <InputField
+      <RangePickerField
         schema={schema}
         path="field3"
         label={'Case #3 - validationTrigger=onChange, clearStateOnChange=true'}
@@ -46,7 +43,7 @@ export const Overview = () => {
         validateTrigger="onChange"
       />
 
-      <InputField
+      <RangePickerField
         schema={schema}
         path="field4"
         label={'Case #4 - validationTrigger=onChange, clearStateOnChange=false'}
@@ -55,7 +52,7 @@ export const Overview = () => {
         clearStateOnChange={false}
       />
 
-      <InputField
+      <RangePickerField
         schema={schema}
         path="field5"
         label={'Case #5 - validationTrigger=none, clearStateOnChange=true'}
@@ -63,7 +60,7 @@ export const Overview = () => {
         validateTrigger="none"
       />
 
-      <InputField
+      <RangePickerField
         schema={schema}
         path="field6"
         label={'Case #6 - validationTrigger=none, clearStateOnChange=false'}
@@ -72,8 +69,8 @@ export const Overview = () => {
         clearStateOnChange={false}
       />
 
-      <InputField
-        schema={{ type: 'string', default: 'readonly content', readonly: true }}
+      <RangePickerField
+        schema={{ default: [moment('2019-09-03'), moment('2019-09-05')], presence: true, readonly: true }}
         path="field7"
         label={'Case #7 - readonly=true'}
         itemProps={{ hasFeedback: true }}

@@ -1,6 +1,6 @@
 import React, { createRef, useCallback } from 'react'
 import { Button } from 'antd'
-import { FormProviderRef, OptionsProvider } from 'rjv-react'
+import { OptionsProvider } from 'rjv-react'
 import Form from '../src/components/Form'
 import InputField from '../src/components/InputField'
 
@@ -12,6 +12,7 @@ export default {
 export const Case1 = () => {
   return (
     <Form
+      data={{}}
       layout={'vertical'}
       onSuccess={(data) => console.log('success', data)}
       onError={(ref: any) => console.log('error', ref)}
@@ -33,33 +34,6 @@ export const Case1 = () => {
 }
 Case1.storyName = 'Overview'
 
-export const Case2 = () => {
-  const formProviderRef = createRef<FormProviderRef>()
-
-  return (
-    <Form
-      ref={formProviderRef}
-      layout={'vertical'}
-      onSuccess={(data) => console.log('success', data)}
-      onError={(ref: any) => console.log('error', ref)}
-    >
-      <InputField
-        schema={{
-          default: '',
-          presence: true,
-          format: 'email'
-        }}
-        path="email"
-        label={'Email'}
-        itemProps={{ hasFeedback: true }}
-        autoFocus
-      />
-      <Button htmlType="submit" onClick={() => console.log(formProviderRef)}>Submit</Button>
-    </Form>
-  )
-}
-Case2.storyName = 'Ref forwarding test'
-
 export const Case3 = () => {
   const descriptionResolver = useCallback((m) => {
     return m.toString().toUpperCase()
@@ -67,7 +41,7 @@ export const Case3 = () => {
 
   return (
     <OptionsProvider descriptionResolver={descriptionResolver}>
-      <Form layout={'vertical'}>
+      <Form data={{}} layout={'vertical'}>
         <InputField
           schema={{
             default: '',

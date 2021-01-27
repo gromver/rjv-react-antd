@@ -17,7 +17,7 @@ export const RadioItems = () => {
   }
 
   return (
-    <Form>
+    <Form data={{}}>
       <RadioGroupField
         schema={schema}
         path="field"
@@ -43,7 +43,7 @@ export const RadioItemsReadonly = () => {
   }
 
   return (
-    <Form>
+    <Form data={{}}>
       <RadioGroupField
         schema={schema}
         path="field"
@@ -66,7 +66,7 @@ export const RadioButtons = () => {
   }
 
   return (
-    <Form>
+    <Form data={{}}>
       <RadioGroupField
         schema={schema}
         path="field"
@@ -92,7 +92,7 @@ export const RadioButtonsReadonly = () => {
   }
 
   return (
-    <Form>
+    <Form data={{}}>
       <RadioGroupField
         schema={schema}
         path="field"

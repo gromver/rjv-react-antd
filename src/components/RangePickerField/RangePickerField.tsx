@@ -1,36 +1,38 @@
 import React, { FC, useContext, useMemo } from 'react'
-import { Form, Select } from 'antd'
-import { SelectProps, SelectValue } from 'antd/es/select'
+import { Form, DatePicker } from 'antd'
+import { DatePickerProps } from 'antd/es/date-picker'
 import { FormItemProps } from 'antd/es/form'
 import { types } from 'rjv'
 import { useField } from 'rjv-react'
 import { FormContext, utils } from '../Form'
 
 const fallbackFormContext = {
-  validateTrigger: 'onChange'
+  validateTrigger: 'onBlur'
 }
 
 type Props = {
+  /**
+   * Path to the field
+   */
   path: string;
   schema: types.ISchema;
   label?: React.ReactNode;
   help?: React.ReactNode;
-  placeholder?: string;
-  inputProps?: SelectProps<SelectValue>;
+  inputProps?: DatePickerProps;
   itemProps?: FormItemProps;
   clearStateOnChange?: boolean;
   autoFocus?: boolean;
   validateTrigger?: 'onBlur' | 'onChange' | 'none';
-  children: React.ReactNodeArray;
 }
 
-const SelectField: FC<Props> = ({
+/**
+ * HOF over Antd RangePicker component
+ */
+const RangePickerField: FC<Props> = ({
   path,
   label,
   help,
   schema,
-  placeholder,
-  children,
   inputProps = {},
   itemProps = {},
   clearStateOnChange = true,
@@ -54,16 +56,18 @@ const SelectField: FC<Props> = ({
       required={state.isRequired}
       {...itemProps}
     >
-      <Select
+      <DatePicker.RangePicker
         ref={inputRef}
         value={field.value}
         onFocus={() => field.touched()}
-        onChange={(value) => {
+        // @ts-ignore
+        onChange={(dates, strings) => {
+          console.log(dates, strings)
           if (clearStateOnChange && validateTrigger !== 'onChange' && state.isValidated) {
             field.invalidated()
           }
 
-          field.dirty().value = value
+          field.dirty().value = dates
 
           validateTrigger === 'onChange' && field.validate()
         }}
@@ -73,14 +77,11 @@ const SelectField: FC<Props> = ({
             : undefined
         }
         disabled={state.isReadonly}
-        placeholder={placeholder}
         autoFocus={autoFocus}
         {...inputProps}
-      >
-        {children}
-      </Select>
+      />
     </Form.Item>
   )
 }
 
-export default SelectField
+export default RangePickerField
