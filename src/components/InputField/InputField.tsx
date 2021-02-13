@@ -2,20 +2,15 @@ import React, { FC, useContext, useMemo } from 'react'
 import { Form, Input } from 'antd'
 import { InputProps } from 'antd/es/input'
 import { FormItemProps } from 'antd/es/form'
-import { types } from 'rjv'
 import { useField } from 'rjv-react'
 import { FormContext, utils } from '../Form'
+import { RjvFieldProps } from '../../types'
 
 const fallbackFormContext = {
   validateTrigger: 'onBlur'
 }
 
-type Props = {
-  /**
-   * Path to the field
-   */
-  path: string;
-  schema: types.ISchema;
+type Props = RjvFieldProps & {
   label?: React.ReactNode;
   help?: React.ReactNode;
   placeholder?: string;
@@ -31,9 +26,10 @@ type Props = {
  */
 const InputField: FC<Props> = ({
   path,
+  schema,
+  dependencies,
   label,
   help,
-  schema,
   placeholder,
   inputProps = {},
   itemProps = {},
@@ -48,7 +44,7 @@ const InputField: FC<Props> = ({
     [formContext.validateTrigger, props.validateTrigger]
   )
 
-  const { field, state, inputRef } = useField(path, schema)
+  const { field, state, inputRef } = useField(path, schema, dependencies)
 
   return (
     <Form.Item

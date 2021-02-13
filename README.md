@@ -56,6 +56,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`dependencies` | `any[]` | [] | external values that affect the validation schema
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
 `placeholder` | `string` | undefined | field placeholder
@@ -74,6 +75,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`dependencies` | `any[]` | [] | external values that affect the validation schema
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
 `placeholder` | `string` | undefined | field placeholder
@@ -92,6 +94,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`dependencies` | `any[]` | [] | external values that affect the validation schema
 `children`* | `React.ReactNodeArray` | undefined | select options
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
@@ -110,6 +113,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`dependencies` | `any[]` | [] | external values that affect the validation schema
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
 `inputProps` | `SwitchProps` | {} | Antd's [`SwitchProps`](https://ant.design/components/switch/#API)
@@ -127,6 +131,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`dependencies` | `any[]` | [] | external values that affect the validation schema
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
 `inputProps` | `CheckboxProps` | {} | Antd's [`CheckboxProps`](https://ant.design/components/checkbox/#Checkbox)
@@ -144,6 +149,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`dependencies` | `any[]` | [] | external values that affect the validation schema
 `children`* | `React.ReactNodeArray` | undefined | checkbox group items
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
@@ -162,6 +168,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`dependencies` | `any[]` | [] | external values that affect the validation schema
 `children`* | `React.ReactNodeArray` | undefined | radio group items
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
@@ -180,6 +187,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`dependencies` | `any[]` | [] | external values that affect the validation schema
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
 `inputProps` | `RateProps` | {} | Antd's [`RateProps`](https://ant.design/components/rate/#API)
@@ -197,6 +205,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`dependencies` | `any[]` | [] | external values that affect the validation schema
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
 `inputProps` | `DatePickerProps` | {} | Antd's [`DatePickerProps`](https://ant.design/components/date-picker/#DatePicker)
@@ -214,6 +223,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`dependencies` | `any[]` | [] | external values that affect the validation schema
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
 `inputProps` | `RangePickerProps` | {} | Antd's [`RangePickerProps`](https://ant.design/components/date-picker/#RangePicker)

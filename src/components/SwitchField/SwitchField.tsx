@@ -2,17 +2,15 @@ import React, { FC, useContext, useMemo } from 'react'
 import { Form, Switch } from 'antd'
 import { SwitchProps } from 'antd/es/switch'
 import { FormItemProps } from 'antd/es/form'
-import { types } from 'rjv'
 import { useField } from 'rjv-react'
 import { FormContext, utils } from '../Form'
+import { RjvFieldProps } from '../../types'
 
 const fallbackFormContext = {
   validateTrigger: 'onChange'
 }
 
-type Props = {
-  path: string;
-  schema: types.ISchema;
+type Props = RjvFieldProps & {
   label?: React.ReactNode;
   help?: React.ReactNode;
   inputProps?: SwitchProps;
@@ -24,9 +22,10 @@ type Props = {
 
 const SwitchField: FC<Props> = ({
   path,
+  schema,
+  dependencies,
   label,
   help,
-  schema,
   inputProps = {},
   itemProps = {},
   clearStateOnChange = true,
@@ -40,7 +39,7 @@ const SwitchField: FC<Props> = ({
     [formContext.validateTrigger, props.validateTrigger]
   )
 
-  const { field, state, inputRef } = useField(path, schema)
+  const { field, state, inputRef } = useField(path, schema, dependencies)
 
   return (
     <Form.Item

@@ -2,17 +2,15 @@ import React, { FC, useContext, useMemo } from 'react'
 import { Form, Rate } from 'antd'
 import { RateProps } from 'antd/es/rate'
 import { FormItemProps } from 'antd/es/form'
-import { types } from 'rjv'
 import { useField } from 'rjv-react'
 import { FormContext, utils } from '../Form'
+import { RjvFieldProps } from '../../types'
 
 const fallbackFormContext = {
   validateTrigger: 'onChange'
 }
 
-type Props = {
-  path: string;
-  schema: types.ISchema;
+type Props = RjvFieldProps & {
   label?: React.ReactNode;
   help?: React.ReactNode;
   inputProps?: RateProps;
@@ -23,9 +21,10 @@ type Props = {
 
 const RateField: FC<Props> = ({
   path,
+  schema,
+  dependencies,
   label,
   help,
-  schema,
   inputProps = {},
   itemProps = {},
   clearStateOnChange = true,
@@ -38,7 +37,7 @@ const RateField: FC<Props> = ({
     [formContext.validateTrigger, props.validateTrigger]
   )
 
-  const { field, state, inputRef } = useField(path, schema)
+  const { field, state, inputRef } = useField(path, schema, dependencies)
 
   return (
     <Form.Item

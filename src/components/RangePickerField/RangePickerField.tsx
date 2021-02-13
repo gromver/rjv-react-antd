@@ -2,20 +2,15 @@ import React, { FC, useContext, useMemo } from 'react'
 import { Form, DatePicker } from 'antd'
 import { DatePickerProps } from 'antd/es/date-picker'
 import { FormItemProps } from 'antd/es/form'
-import { types } from 'rjv'
 import { useField } from 'rjv-react'
 import { FormContext, utils } from '../Form'
+import { RjvFieldProps } from '../../types'
 
 const fallbackFormContext = {
   validateTrigger: 'onBlur'
 }
 
-type Props = {
-  /**
-   * Path to the field
-   */
-  path: string;
-  schema: types.ISchema;
+type Props = RjvFieldProps & {
   label?: React.ReactNode;
   help?: React.ReactNode;
   inputProps?: DatePickerProps;
@@ -30,9 +25,10 @@ type Props = {
  */
 const RangePickerField: FC<Props> = ({
   path,
+  schema,
+  dependencies,
   label,
   help,
-  schema,
   inputProps = {},
   itemProps = {},
   clearStateOnChange = true,
@@ -46,7 +42,7 @@ const RangePickerField: FC<Props> = ({
     [formContext.validateTrigger, props.validateTrigger]
   )
 
-  const { field, state, inputRef } = useField(path, schema)
+  const { field, state, inputRef } = useField(path, schema, dependencies)
 
   return (
     <Form.Item

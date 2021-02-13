@@ -2,17 +2,15 @@ import React, { FC, useContext, useMemo } from 'react'
 import { Form, Checkbox } from 'antd'
 import { CheckboxGroupProps } from 'antd/es/checkbox'
 import { FormItemProps } from 'antd/es/form'
-import { types } from 'rjv'
 import { useField } from 'rjv-react'
 import { FormContext, utils } from '../Form'
+import { RjvFieldProps } from '../../types'
 
 const fallbackFormContext = {
   validateTrigger: 'onChange'
 }
 
-type Props = {
-  path: string;
-  schema: types.ISchema;
+type Props = RjvFieldProps & {
   label?: React.ReactNode;
   help?: React.ReactNode;
   inputProps?: CheckboxGroupProps;
@@ -24,9 +22,10 @@ type Props = {
 
 const CheckboxGroupField: FC<Props> & { Checkbox: typeof Checkbox } = ({
   path,
+  schema,
+  dependencies,
   label,
   help,
-  schema,
   children,
   inputProps = {},
   itemProps = {},
@@ -40,7 +39,7 @@ const CheckboxGroupField: FC<Props> & { Checkbox: typeof Checkbox } = ({
     [formContext.validateTrigger, props.validateTrigger]
   )
 
-  const { field, state } = useField(path, schema)
+  const { field, state } = useField(path, schema, dependencies)
 
   return (
     <Form.Item

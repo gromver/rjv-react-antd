@@ -2,17 +2,15 @@ import React, { FC, useContext, useMemo } from 'react'
 import { Form, Radio } from 'antd'
 import { RadioGroupProps } from 'antd/es/radio'
 import { FormItemProps } from 'antd/es/form'
-import { types } from 'rjv'
 import { useField } from 'rjv-react'
 import { FormContext, utils } from '../Form'
+import { RjvFieldProps } from '../../types'
 
 const fallbackFormContext = {
   validateTrigger: 'onChange'
 }
 
-type Props = {
-  path: string;
-  schema: types.ISchema;
+type Props = RjvFieldProps & {
   label?: React.ReactNode;
   help?: React.ReactNode;
   inputProps?: RadioGroupProps;
@@ -24,9 +22,10 @@ type Props = {
 
 const RadioGroupField: FC<Props> = ({
   path,
+  schema,
+  dependencies,
   label,
   help,
-  schema,
   children,
   inputProps = {},
   itemProps = {},
@@ -40,7 +39,7 @@ const RadioGroupField: FC<Props> = ({
     [formContext.validateTrigger, props.validateTrigger]
   )
 
-  const { field, state, inputRef } = useField(path, schema)
+  const { field, state, inputRef } = useField(path, schema, dependencies)
 
   return (
     <Form.Item
