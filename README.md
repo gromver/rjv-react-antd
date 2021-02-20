@@ -20,6 +20,7 @@ Properties extend Ant's form [props](https://ant.design/components/form/#Form):
 Name | Type | Default | Description
 --- | :---: | :---: | ---
 `data`* | `any` | undefined | initial form data
+`ref` | `RefObject<FormApi>` | undefined | ref to the [FormApi](https://github.com/gromver/rjv-react#formapi) instance
 `validateTrigger` | `string` | 'onBlur' | when fields should be validated, possible values `onBlur`, `onChange`, `none`
 `focusFirstError` | `boolean` | true | focus the first field with an error after a form submitting
 `onSuccess` | `(data: any) => void` &#124; `Promise<void>` | undefined | successful form submission handler
@@ -56,6 +57,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`ref` | `RefObject<FormApi>` | undefined | ref to the [FieldApi](https://github.com/gromver/rjv-react#fieldapi) instance
 `dependencies` | `any[]` | [] | external values that affect the validation schema
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
@@ -75,6 +77,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`ref` | `RefObject<FormApi>` | undefined | ref to the [FieldApi](https://github.com/gromver/rjv-react#fieldapi) instance
 `dependencies` | `any[]` | [] | external values that affect the validation schema
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
@@ -94,6 +97,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`ref` | `RefObject<FormApi>` | undefined | ref to the [FieldApi](https://github.com/gromver/rjv-react#fieldapi) instance
 `dependencies` | `any[]` | [] | external values that affect the validation schema
 `children`* | `React.ReactNodeArray` | undefined | select options
 `label` | `React.ReactNode` | undefined | field label
@@ -113,6 +117,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`ref` | `RefObject<FormApi>` | undefined | ref to the [FieldApi](https://github.com/gromver/rjv-react#fieldapi) instance
 `dependencies` | `any[]` | [] | external values that affect the validation schema
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
@@ -131,6 +136,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`ref` | `RefObject<FormApi>` | undefined | ref to the [FieldApi](https://github.com/gromver/rjv-react#fieldapi) instance
 `dependencies` | `any[]` | [] | external values that affect the validation schema
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
@@ -149,6 +155,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`ref` | `RefObject<FormApi>` | undefined | ref to the [FieldApi](https://github.com/gromver/rjv-react#fieldapi) instance
 `dependencies` | `any[]` | [] | external values that affect the validation schema
 `children`* | `React.ReactNodeArray` | undefined | checkbox group items
 `label` | `React.ReactNode` | undefined | field label
@@ -168,6 +175,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`ref` | `RefObject<FormApi>` | undefined | ref to the [FieldApi](https://github.com/gromver/rjv-react#fieldapi) instance
 `dependencies` | `any[]` | [] | external values that affect the validation schema
 `children`* | `React.ReactNodeArray` | undefined | radio group items
 `label` | `React.ReactNode` | undefined | field label
@@ -187,6 +195,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`ref` | `RefObject<FormApi>` | undefined | ref to the [FieldApi](https://github.com/gromver/rjv-react#fieldapi) instance
 `dependencies` | `any[]` | [] | external values that affect the validation schema
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
@@ -205,6 +214,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`ref` | `RefObject<FormApi>` | undefined | ref to the [FieldApi](https://github.com/gromver/rjv-react#fieldapi) instance
 `dependencies` | `any[]` | [] | external values that affect the validation schema
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help
@@ -223,6 +233,7 @@ Name | Type | Default | Description
 --- | :---: | :---: | ---
 `path`* | `string` | undefined | path to the data property
 `schema`* | `Object<Schema>` | undefined | validation JSON schema
+`ref` | `RefObject<FormApi>` | undefined | ref to the [FieldApi](https://github.com/gromver/rjv-react#fieldapi) instance
 `dependencies` | `any[]` | [] | external values that affect the validation schema
 `label` | `React.ReactNode` | undefined | field label
 `help` | `React.ReactNode` | undefined | field help

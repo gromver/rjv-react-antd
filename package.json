@@ -1,6 +1,6 @@
 {
   "name": "rjv-react-antd",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "Ant Design's form fields powered by the rjv-react",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
