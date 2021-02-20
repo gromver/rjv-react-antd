@@ -1,10 +1,10 @@
-import React, { useMemo, useCallback, FC } from 'react'
+import React, { useMemo, useCallback, FC, forwardRef, RefObject } from 'react'
 import { Form as AntForm } from 'antd'
 import { FormProps as AntFormProps } from 'antd/es/form'
-import { FormProvider, useFormApi, FirstErrorField } from 'rjv-react'
+import { FormProvider, useFormApi, FormApi, FirstErrorField } from 'rjv-react'
 import { FormContext, FormContextValue } from './FormContext'
 
-type Props = AntFormProps & {
+type FormProps = AntFormProps & {
   validateTrigger?: 'onBlur' | 'onChange' | 'none';
   focusFirstError?: boolean;
   onSuccess?: (data: any) => void | Promise<void>;
@@ -17,7 +17,7 @@ function Form ({
   onError,
   focusFirstError = true,
   ...formProps
-}: Props) {
+}: FormProps) {
   const formContextValue = useMemo<FormContextValue>(() => {
     return {
       validateTrigger: validateTrigger || 'onBlur'
@@ -46,12 +46,14 @@ function Form ({
   )
 }
 
-const WithFormProvider: FC<Props & { data: any }> = ({ data, ...rest }) => {
+type WithFormProviderProps = FormProps & { data: any }
+
+const WithFormProvider: FC<WithFormProviderProps> = ({ data, ...rest }, ref) => {
   return (
-    <FormProvider data={data}>
+    <FormProvider ref={ref} data={data}>
       <Form {...rest} />
     </FormProvider>
   )
 }
 
-export default WithFormProvider
+export default forwardRef<FormApi, WithFormProviderProps>(WithFormProvider)

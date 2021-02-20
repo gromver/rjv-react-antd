@@ -1,6 +1,6 @@
-import React, { createRef, useCallback } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { Button } from 'antd'
-import { OptionsProvider } from 'rjv-react'
+import { FormApi, OptionsProvider } from 'rjv-react'
 import Form from '../src/components/Form'
 import InputField from '../src/components/InputField'
 
@@ -34,7 +34,7 @@ export const Case1 = () => {
 }
 Case1.storyName = 'Overview'
 
-export const Case3 = () => {
+export const Case2 = () => {
   const descriptionResolver = useCallback((m) => {
     return m.toString().toUpperCase()
   }, [])
@@ -78,4 +78,30 @@ export const Case3 = () => {
     </OptionsProvider>
   )
 }
-Case3.storyName = 'With default options and async validation'
+Case2.storyName = 'With default options and async validation'
+
+export const Case3 = () => {
+  const formRef = useRef<FormApi>(null)
+
+  return (
+    <Form
+      ref={formRef}
+      data={{}}
+      layout={'vertical'}
+    >
+      <InputField
+        schema={{
+          default: '',
+          presence: true,
+          format: 'email'
+        }}
+        path="email"
+        label={'Email'}
+        itemProps={{ hasFeedback: true }}
+        autoFocus
+      />
+      <Button onClick={() => formRef.current?.validateFields('/email')}>Trigger validate</Button>
+    </Form>
+  )
+}
+Case3.storyName = 'Test a ref forwarding'
