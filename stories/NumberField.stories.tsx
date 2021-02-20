@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { types } from 'rjv'
+import { FieldApi } from 'rjv-react'
 import NumberField from '../src/components/NumberField'
 import Form from '../src/components/Form/Form'
 import { Alert, Button } from 'antd'
@@ -80,6 +81,26 @@ export const Overview = () => {
       />
 
       <Button htmlType="submit">Submit</Button>
+    </Form>
+  )
+}
+
+export const RefForwarding = () => {
+  const fieldRef = useRef<FieldApi>(null)
+
+  return (
+    <Form data={{}} layout="vertical">
+      <NumberField
+        ref={fieldRef}
+        schema={{ presence: true }}
+        path="field"
+        label="Required field"
+        itemProps={{ hasFeedback: true }}
+        validateTrigger="none"
+        autoFocus
+      />
+
+      <Button onClick={() => fieldRef.current?.validate()}>Trigger validate</Button>
     </Form>
   )
 }

@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { types } from 'rjv'
+import { FieldApi } from 'rjv-react'
 import { Alert, Button } from 'antd'
 import Form from '../src/components/Form'
 import SwitchField from '../src/components/SwitchField'
@@ -76,6 +77,26 @@ export const Readonly = () => {
         itemProps={{ hasFeedback: true }}
         validateTrigger="onChange"
       />
+    </Form>
+  )
+}
+
+export const RefForwarding = () => {
+  const fieldRef = useRef<FieldApi>(null)
+
+  return (
+    <Form data={{}} layout="vertical">
+      <SwitchField
+        ref={fieldRef}
+        schema={{ default: false, const: true }}
+        path="field"
+        label="Must be true"
+        itemProps={{ hasFeedback: true }}
+        validateTrigger="none"
+        autoFocus
+      />
+
+      <Button onClick={() => fieldRef.current?.validate()}>Trigger validate</Button>
     </Form>
   )
 }

@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { types } from 'rjv'
+import { FieldApi } from 'rjv-react'
 import { Alert, Button, Select } from 'antd'
 import Form from '../src/components/Form'
 import SelectField from '../src/components/SelectField'
@@ -233,6 +234,29 @@ export const MultipleItems = () => {
       </SelectField>
 
       <Button htmlType="submit">Submit</Button>
+    </Form>
+  )
+}
+
+export const RefForwarding = () => {
+  const fieldRef = useRef<FieldApi>(null)
+
+  return (
+    <Form data={{}} layout="vertical">
+      <SelectField
+        ref={fieldRef}
+        schema={{ presence: true }}
+        path="field"
+        label="Required field"
+        itemProps={{ hasFeedback: true }}
+        validateTrigger="none"
+        autoFocus
+      >
+        <Select.Option value={'foo'}>Foo</Select.Option>
+        <Select.Option value={'bar'}>Bar</Select.Option>
+      </SelectField>
+
+      <Button onClick={() => fieldRef.current?.validate()}>Trigger validate</Button>
     </Form>
   )
 }

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useRef } from 'react'
+import { FieldApi } from 'rjv-react'
 import { Button } from 'antd'
 import Form from '../src/components/Form'
 import RateField from '../src/components/RateField'
@@ -40,6 +41,25 @@ export const Readonly = () => {
         itemProps={{ hasFeedback: true }}
       />
       <Button htmlType="submit">Submit</Button>
+    </Form>
+  )
+}
+
+export const RefForwarding = () => {
+  const fieldRef = useRef<FieldApi>(null)
+
+  return (
+    <Form data={{}} layout="vertical">
+      <RateField
+        ref={fieldRef}
+        schema={{ presence: true }}
+        path="field"
+        label="Required field"
+        itemProps={{ hasFeedback: true }}
+        validateTrigger="none"
+      />
+
+      <Button onClick={() => fieldRef.current?.validate()}>Trigger validate</Button>
     </Form>
   )
 }

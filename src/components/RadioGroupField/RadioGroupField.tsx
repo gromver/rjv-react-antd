@@ -1,8 +1,8 @@
-import React, { FC, useContext, useMemo } from 'react'
+import React, { FC, forwardRef, useContext, useImperativeHandle, useMemo } from 'react'
 import { Form, Radio } from 'antd'
 import { RadioGroupProps } from 'antd/es/radio'
 import { FormItemProps } from 'antd/es/form'
-import { useField } from 'rjv-react'
+import { FieldApi, useField } from 'rjv-react'
 import { FormContext, utils } from '../Form'
 import { RjvFieldProps } from '../../types'
 
@@ -31,7 +31,7 @@ const RadioGroupField: FC<Props> = ({
   itemProps = {},
   clearStateOnChange = true,
   ...props
-}) => {
+}, ref) => {
   const formContext = useContext(FormContext) || fallbackFormContext
 
   const validateTrigger = useMemo(
@@ -40,6 +40,8 @@ const RadioGroupField: FC<Props> = ({
   )
 
   const { field, state, inputRef } = useField(path, schema, dependencies)
+
+  useImperativeHandle(ref, () => field, [field])
 
   return (
     <Form.Item
@@ -70,4 +72,4 @@ const RadioGroupField: FC<Props> = ({
   )
 }
 
-export default RadioGroupField
+export default forwardRef<FieldApi, Props>(RadioGroupField)

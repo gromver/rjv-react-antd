@@ -1,8 +1,8 @@
-import React, { FC, useContext, useMemo } from 'react'
+import React, { FC, useContext, useMemo, forwardRef, useImperativeHandle } from 'react'
 import { Form, Checkbox } from 'antd'
 import { CheckboxProps } from 'antd/es/checkbox'
 import { FormItemProps } from 'antd/es/form'
-import { useField } from 'rjv-react'
+import { FieldApi, useField } from 'rjv-react'
 import { FormContext, utils } from '../Form'
 import { RjvFieldProps } from '../../types'
 
@@ -31,7 +31,7 @@ const CheckboxField: FC<Props> = ({
   clearStateOnChange = true,
   autoFocus = false,
   ...props
-}: Props) => {
+}, ref) => {
   const formContext = useContext(FormContext) || fallbackFormContext
 
   const validateTrigger = useMemo(
@@ -40,6 +40,8 @@ const CheckboxField: FC<Props> = ({
   )
 
   const { field, state, inputRef } = useField(path, schema, dependencies)
+
+  useImperativeHandle(ref, () => field, [field])
 
   return (
     <Form.Item
@@ -69,4 +71,4 @@ const CheckboxField: FC<Props> = ({
   )
 }
 
-export default CheckboxField
+export default forwardRef<FieldApi, Props>(CheckboxField)

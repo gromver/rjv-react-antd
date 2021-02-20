@@ -1,8 +1,8 @@
-import React, { FC, useContext, useMemo } from 'react'
+import React, { FC, forwardRef, useContext, useImperativeHandle, useMemo } from 'react'
 import { Form, DatePicker } from 'antd'
 import { DatePickerProps } from 'antd/es/date-picker'
 import { FormItemProps } from 'antd/es/form'
-import { useField } from 'rjv-react'
+import { FieldApi, useField } from 'rjv-react'
 import { FormContext, utils } from '../Form'
 import { RjvFieldProps } from '../../types'
 
@@ -34,7 +34,7 @@ const RangePickerField: FC<Props> = ({
   clearStateOnChange = true,
   autoFocus = false,
   ...props
-}) => {
+}, ref) => {
   const formContext = useContext(FormContext) || fallbackFormContext
 
   const validateTrigger = useMemo(
@@ -43,6 +43,8 @@ const RangePickerField: FC<Props> = ({
   )
 
   const { field, state, inputRef } = useField(path, schema, dependencies)
+
+  useImperativeHandle(ref, () => field, [field])
 
   return (
     <Form.Item
@@ -80,4 +82,4 @@ const RangePickerField: FC<Props> = ({
   )
 }
 
-export default RangePickerField
+export default forwardRef<FieldApi, Props>(RangePickerField)

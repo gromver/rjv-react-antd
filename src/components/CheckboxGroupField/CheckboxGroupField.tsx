@@ -1,8 +1,8 @@
-import React, { FC, useContext, useMemo } from 'react'
+import React, { FC, useContext, useMemo, forwardRef, useImperativeHandle } from 'react'
 import { Form, Checkbox } from 'antd'
 import { CheckboxGroupProps } from 'antd/es/checkbox'
 import { FormItemProps } from 'antd/es/form'
-import { useField } from 'rjv-react'
+import { FieldApi, useField } from 'rjv-react'
 import { FormContext, utils } from '../Form'
 import { RjvFieldProps } from '../../types'
 
@@ -20,7 +20,7 @@ type Props = RjvFieldProps & {
   children: React.ReactNodeArray;
 }
 
-const CheckboxGroupField: FC<Props> & { Checkbox: typeof Checkbox } = ({
+const CheckboxGroupField: FC<Props> = ({
   path,
   schema,
   dependencies,
@@ -31,7 +31,7 @@ const CheckboxGroupField: FC<Props> & { Checkbox: typeof Checkbox } = ({
   itemProps = {},
   clearStateOnChange = true,
   ...props
-}: Props) => {
+}, ref) => {
   const formContext = useContext(FormContext) || fallbackFormContext
 
   const validateTrigger = useMemo(
@@ -40,6 +40,8 @@ const CheckboxGroupField: FC<Props> & { Checkbox: typeof Checkbox } = ({
   )
 
   const { field, state } = useField(path, schema, dependencies)
+
+  useImperativeHandle(ref, () => field, [field])
 
   return (
     <Form.Item
@@ -69,6 +71,4 @@ const CheckboxGroupField: FC<Props> & { Checkbox: typeof Checkbox } = ({
   )
 }
 
-CheckboxGroupField.Checkbox = Checkbox
-
-export default CheckboxGroupField
+export default forwardRef<FieldApi, Props>(CheckboxGroupField)

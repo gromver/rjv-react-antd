@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Form from '../src/components/Form'
 import CheckboxGroupField from '../src/components/CheckboxGroupField'
+import { FieldApi } from 'rjv-react'
+import { Button, Checkbox } from 'antd'
 
 export default {
   title: 'Components / CheckboxGroupField',
@@ -24,9 +26,9 @@ export const Overview = () => {
         itemProps={{ hasFeedback: true }}
         validateTrigger="onChange"
       >
-        <CheckboxGroupField.Checkbox value={'a'}>A</CheckboxGroupField.Checkbox>
-        <CheckboxGroupField.Checkbox value={'b'}>B</CheckboxGroupField.Checkbox>
-        <CheckboxGroupField.Checkbox value={'c'}>C</CheckboxGroupField.Checkbox>
+        <Checkbox value={'a'}>A</Checkbox>
+        <Checkbox value={'b'}>B</Checkbox>
+        <Checkbox value={'c'}>C</Checkbox>
       </CheckboxGroupField>
     </Form>
   )
@@ -45,10 +47,40 @@ export const Readonly = () => {
         itemProps={{ hasFeedback: true }}
         validateTrigger="onChange"
       >
-        <CheckboxGroupField.Checkbox value={'a'}>A</CheckboxGroupField.Checkbox>
-        <CheckboxGroupField.Checkbox value={'b'}>B</CheckboxGroupField.Checkbox>
-        <CheckboxGroupField.Checkbox value={'c'}>C</CheckboxGroupField.Checkbox>
+        <Checkbox value={'a'}>A</Checkbox>
+        <Checkbox value={'b'}>B</Checkbox>
+        <Checkbox value={'c'}>C</Checkbox>
       </CheckboxGroupField>
+    </Form>
+  )
+}
+
+export const RefForwarding = () => {
+  const fieldRef = useRef<FieldApi>(null)
+
+  return (
+    <Form data={{}} layout="vertical">
+      <CheckboxGroupField
+        ref={fieldRef}
+        schema={{
+          default: [],
+          items: {
+            type: 'string',
+            enum: ['a', 'b']
+          }
+        }}
+        path="field"
+        label={'Checkbox group'}
+        help={'Only "a" and "b" are valid'}
+        itemProps={{ hasFeedback: true }}
+        validateTrigger="none"
+      >
+        <Checkbox value={'a'}>A</Checkbox>
+        <Checkbox value={'b'}>B</Checkbox>
+        <Checkbox value={'c'}>C</Checkbox>
+      </CheckboxGroupField>
+
+      <Button onClick={() => fieldRef.current?.validate()}>Trigger validate</Button>
     </Form>
   )
 }

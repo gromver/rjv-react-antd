@@ -1,6 +1,7 @@
-import React from 'react'
-import { Radio } from 'antd'
+import React, { useRef } from 'react'
+import { Button, Radio } from 'antd'
 import { types } from 'rjv'
+import { FieldApi } from 'rjv-react'
 import Form from '../src/components/Form'
 import RadioGroupField from '../src/components/RadioGroupField'
 
@@ -103,6 +104,33 @@ export const RadioButtonsReadonly = () => {
         <Radio.Button value={'b'}>B</Radio.Button>
         <Radio.Button value={'c'}>C</Radio.Button>
       </RadioGroupField>
+    </Form>
+  )
+}
+
+export const RefForwarding = () => {
+  const fieldRef = useRef<FieldApi>(null)
+
+  return (
+    <Form data={{}} layout="vertical">
+      <RadioGroupField
+        ref={fieldRef}
+        schema={{
+          default: '',
+          type: 'string',
+          enum: ['a', 'b']
+        }}
+        path="field"
+        label={'Only "a" or "b" are valid'}
+        itemProps={{ hasFeedback: true }}
+        validateTrigger="none"
+      >
+        <Radio.Button value={'a'}>A</Radio.Button>
+        <Radio.Button value={'b'}>B</Radio.Button>
+        <Radio.Button value={'c'}>C</Radio.Button>
+      </RadioGroupField>
+
+      <Button onClick={() => fieldRef.current?.validate()}>Trigger validate</Button>
     </Form>
   )
 }

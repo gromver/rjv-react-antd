@@ -1,8 +1,8 @@
-import React, { FC, useContext, useMemo } from 'react'
+import React, { FC, forwardRef, useContext, useImperativeHandle, useMemo } from 'react'
 import { Form, Select } from 'antd'
 import { SelectProps, SelectValue } from 'antd/es/select'
 import { FormItemProps } from 'antd/es/form'
-import { useField } from 'rjv-react'
+import { FieldApi, useField } from 'rjv-react'
 import { FormContext, utils } from '../Form'
 import { RjvFieldProps } from '../../types'
 
@@ -35,7 +35,7 @@ const SelectField: FC<Props> = ({
   clearStateOnChange = true,
   autoFocus = false,
   ...props
-}) => {
+}, ref) => {
   const formContext = useContext(FormContext) || fallbackFormContext
 
   const validateTrigger = useMemo(
@@ -44,6 +44,8 @@ const SelectField: FC<Props> = ({
   )
 
   const { field, state, inputRef } = useField(path, schema, dependencies)
+
+  useImperativeHandle(ref, () => field, [field])
 
   return (
     <Form.Item
@@ -82,4 +84,4 @@ const SelectField: FC<Props> = ({
   )
 }
 
-export default SelectField
+export default forwardRef<FieldApi, Props>(SelectField)

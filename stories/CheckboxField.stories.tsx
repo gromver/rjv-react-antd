@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { types } from 'rjv'
 import { Alert, Button } from 'antd'
 import Form from '../src/components/Form'
 import CheckboxField from '../src/components/CheckboxField'
+import { FieldApi } from 'rjv-react'
 
 export default {
   title: 'Components / CheckboxField',
@@ -63,6 +64,28 @@ export const Overview = () => {
       />
 
       <Button htmlType="submit">Submit</Button>
+    </Form>
+  )
+}
+
+export const RefForwarding = () => {
+  const fieldRef = useRef<FieldApi>(null)
+
+  return (
+    <Form data={{}} layout="vertical">
+      <CheckboxField
+        ref={fieldRef}
+        schema={{
+          default: false,
+          const: true
+        }}
+        path="field"
+        label="Must be true"
+        itemProps={{ hasFeedback: true }}
+        validateTrigger="none"
+      />
+
+      <Button onClick={() => fieldRef.current?.validate()}>Trigger validate</Button>
     </Form>
   )
 }
